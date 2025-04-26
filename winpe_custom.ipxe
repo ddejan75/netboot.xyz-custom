@@ -1,0 +1,25 @@
+#!ipxe
+
+:custom
+clear custom_choice
+
+menu WinPE Strelec x86
+item --gap WinPE Strelec x86
+item win_load ${space} Loading WinPE Strelec x86
+choose custom_choice || goto custom_exit
+echo ${cls}
+goto ${custom_choice}
+goto custom_exit
+
+
+:win_load
+kernel http://${boot_domain}/wimboot
+initrd -n bootmgr     ${win_base_url}/Strelec/bootmgr       bootmgr ||
+initrd -n bcd         ${win_base_url}/Strelec/BCD      bcd ||
+initrd -n boot.sdi    ${win_base_url}/Strelec/boot.sdi boot.sdi ||
+initrd -n boot.wim    ${win_base_url}/Strelec/strelec81.wim boot.wim
+boot || goto custom_exit
+
+:custom_exit
+chain utils.ipxe
+exit
