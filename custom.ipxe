@@ -16,13 +16,14 @@ item hirens      ${space} Hirens Boot CD PE x64
 item hirens_iso  ${space} Hirens Boot CD PE x64 ISO 2025.10.19
 item strelec     ${space} Strelec x86
 item strelec_iso ${space} Strelec ISO 2025.09.29
-item win11       ${space} Windows 11 25H2
 item --gap iVentoy:
 item iventoy     ${space} iVentoy
 item iventoy2    ${space} iVentoy2
 item --gap Virtualization:
 item proxmox9    ${space} Proxmox VE 9.0.1
 item --gap Windows:
+item win11       ${space} Windows 11 25H2
+item --gap --
 item reboot      ${space} Reboot
 choose custom_choice || goto custom_exit
 echo ${cls}
@@ -30,6 +31,13 @@ goto ${custom_choice}
 goto custom_exit
 
 endless6:
+set boot_iso eos-eos6.0-amd64-amd64.250610-092714.en.iso
+imgfetch --name endlessos_iso ${base-url}/assets/ISO/${boot_iso}
+kernel ${base-url}/memdisk
+initrd ${endlessos_iso}
+imgargs memdisk iso raw
+boot
+
 kernel https://boot.netboot.xyz/memdisk raw iso
 initrd ${base-url}/ISO/eos-eos6.0-amd64-amd64.250610-092714.en.iso
 boot || goto custom_exit
