@@ -3,7 +3,7 @@
 ### netboot.xyz-custom menu example
 ###
 
-set base-url ${live_endpoint}/assets/ISO
+set base-url ${live_endpoint}/ISO
 
 :custom
 clear custom_choice
