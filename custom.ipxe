@@ -12,10 +12,8 @@ item --gap Linux Distros
 item endless6    ${space} Endless OS 6 2025.06.10
 item pop2204     ${space} Pop OS 22.04
 item --gap Utilities:
-item hirens      ${space} Hirens Boot CD PE x64
-item hirens_iso  ${space} Hirens Boot CD PE x64 ISO 2025.10.19
-item strelec     ${space} Strelec x86
-item strelec_iso ${space} Strelec ISO 2025.09.29
+item hirens      ${space} Hirens Boot CD PE x64 (2025.10.19)
+item strelec     ${space} Strelec (2025.09.29)
 item --gap iVentoy:
 item iventoy     ${space} iVentoy
 item iventoy2    ${space} iVentoy2
@@ -39,18 +37,14 @@ boot || goto custom_exit
 
 :hirens
 echo Booting Hirens Boot CD PE x64...
+set folder hirens
 imgfree
 kernel https://boot.netboot.xyz/wimboot
-initrd -n bootmgr     ${base-url}/hirensboot/BOOTMGR           bootmgr ||
-initrd -n bootmgr.efi ${base-url}/hirensboot/bootmgr.efi       bootmgr.efi ||      
-initrd -n bcd         ${base-url}/hirensboot/boot/bcd          bcd||
-initrd -n boot.sdi    ${base-url}/hirensboot/boot/boot.sdi     boot.sdi||
-initrd -n boot.wim    ${base-url}/hirensboot/sources/boot.wim  boot.wim
-boot || goto custom_exit
-
-:hirens_iso
-kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}/HBCD_PE_x64.iso
+initrd -n bootmgr     ${base-url}/${folder}/BOOTMGR           bootmgr ||
+initrd -n bootmgr.efi ${base-url}/${folder}/bootmgr.efi       bootmgr.efi ||      
+initrd -n bcd         ${base-url}/${folder}/boot/bcd          bcd||
+initrd -n boot.sdi    ${base-url}/${folder}/boot/boot.sdi     boot.sdi||
+initrd -n boot.wim    ${base-url}/${folder}/sources/boot.wim  boot.wim
 boot || goto custom_exit
 
 :pop2204
@@ -64,15 +58,17 @@ initrd ${base-url}/proxmox-ve_9.0-1.iso
 boot || goto custom_exit
 
 :strelec
+echo Booting Strelec...
+set folder strelec
 kernel http://${boot_domain}/wimboot
-initrd ${base_url}/Strelec/bootmgr       bootmgr ||
-initrd ${base_url}/Strelec/BCD           BCD ||
-initrd ${base_url}/Strelec/boot.sdi      boot.sdi ||
-initrd ${base_url}/Strelec/strelec81.wim boot.wim
-initrd ${base_url}/strelec/bootmgr       bootmgr ||
-initrd ${base_url}/strelec/BCD           BCD ||
-initrd ${base_url}/strelec/boot.sdi      boot.sdi ||
-initrd ${base_url}/strelec/strelec81.wim boot.wim
+initrd ${base_url}/${folder}/bootmgr       bootmgr ||
+initrd ${base_url}/${folder}/BCD           BCD ||
+initrd ${base_url}/${folder}/boot.sdi      boot.sdi ||
+initrd ${base_url}/${folder}/strelec81.wim boot.wim
+initrd ${base_url}/${folder}/bootmgr       bootmgr ||
+initrd ${base_url}/${folder}/BCD           BCD ||
+initrd ${base_url}/${folder}/boot.sdi      boot.sdi ||
+initrd ${base_url}/${folder}/strelec81.wim boot.wim
 boot || goto custom_exit
 
 :strelec_iso
