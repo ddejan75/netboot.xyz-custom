@@ -6,10 +6,11 @@
 :custom
 clear custom_choice
 menu Please choose an option:
+item --gap -- ---------------------
 item endless6    ${space} Endless OS 6 2025.06.10
 item hirens      ${space} Hirens Boot CD PE x64
 item hirens_iso  ${space} Hirens Boot CD PE x64 ISO 2025.10.19
-item pop220      ${space} Pop OS 22.04
+item pop2204     ${space} Pop OS 22.04
 item proxmox9    ${space} Proxmox VE 9.0.1
 item strelec     ${space} Strelec x86
 item strelec_iso ${space} Strelec ISO 2025.09.29
@@ -42,17 +43,16 @@ kernel https://boot.netboot.xyz/memdisk raw iso
 initrd ${base-url}/ISO/HBCD_PE_x64.iso
 boot || goto custom_exit
 
-:proxmox9
-kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}/ISO/proxmox-ve_9.0-1.iso
-boot || goto custom_exit
-
 :pop2204
 kernel https://boot.netboot.xyz/memdisk raw iso
 initrd ${base-url}/ISO/pop-os_22.04_amd64_intel_58.iso
 boot || goto custom_exit
 
-:win_load
+:proxmox9
+kernel https://boot.netboot.xyz/memdisk raw iso
+initrd ${base-url}/ISO/proxmox-ve_9.0-1.iso
+boot || goto custom_exit
+
 :strelec
 kernel http://${boot_domain}/wimboot
 initrd ${win_base_url}/Strelec/bootmgr       bootmgr ||
