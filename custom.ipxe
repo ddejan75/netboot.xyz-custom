@@ -4,6 +4,8 @@
 ###
 
 set base-url ${live_endpoint}/ISO
+echo ${base-url}
+echo ${live_endpoint}
 
 :custom
 clear custom_choice
