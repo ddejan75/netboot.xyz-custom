@@ -3,7 +3,7 @@
 ### netboot.xyz-custom menu example
 ###
 
-set base-url ${live_endpoint}
+set base-url ${live_endpoint}/assets/ISO
 
 :custom
 clear custom_choice
@@ -32,14 +32,14 @@ goto custom_exit
 
 endless6:
 set boot_iso eos-eos6.0-amd64-amd64.250610-092714.en.iso
-imgfetch --name endless6_iso ${base-url}/ISO/${boot_iso}
+imgfetch --name endless6_iso ${base-url}/${boot_iso}
 kernel ${base-url}/memdisk
 initrd ${endless6_iso}
 imgargs memdisk iso raw
 boot
 
 kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}/ISO/eos-eos6.0-amd64-amd64.250610-092714.en.iso
+initrd ${base-url}/eos-eos6.0-amd64-amd64.250610-092714.en.iso
 boot || goto custom_exit
 
 :hirens
@@ -55,17 +55,17 @@ boot
 
 :hirens_iso
 kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}/ISO/HBCD_PE_x64.iso
+initrd ${base-url}/HBCD_PE_x64.iso
 boot || goto custom_exit
 
 :pop2204
 kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}/ISO/pop-os_22.04_amd64_intel_58.iso
+initrd ${base-url}/pop-os_22.04_amd64_intel_58.iso
 boot || goto custom_exit
 
 :proxmox9
 kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}/ISO/proxmox-ve_9.0-1.iso
+initrd ${base-url}/proxmox-ve_9.0-1.iso
 boot || goto custom_exit
 
 :strelec
@@ -82,12 +82,12 @@ boot || goto custom_exit
 
 :strelec_iso
 kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}/ISO/WinPE11_10_Sergei_Strelec_x64_2025.09.29_English.iso
+initrd ${base-url}/WinPE11_10_Sergei_Strelec_x64_2025.09.29_English.iso
 boot || goto custom_exit
 
 win11:
 kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}/ISO/Win11_25H2_English_x64.iso
+initrd ${base-url}/Win11_25H2_English_x64.iso
 boot || goto custom_exit
 
 :iventoy
