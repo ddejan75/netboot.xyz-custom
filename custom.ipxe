@@ -37,21 +37,16 @@ boot || goto custom_exit
 
 :iventoy
 #set user-class iVentoy
-set new-server:ipv4 192.168.10.91
-dhcp
-#set user-class 
-chain tftp://${new-server}/iventoy_loader_16000
+set pxeserver:ipv4 192.168.10.91
+set next-server ${pxeserver}
+chain tftp://${pxeserver}/iventoy_loader_16000
 
 :iventoy2
-# set user-class iVentoy
-# set new-server:ipv4 192.168.10.91
 set new-server:ipv4 192.168.10.91
-set new-bootfile iventoy_loader_16000_uefi
+set new-bootfile iventoy_loader_16000
 set net0/next-server ${new-server}
-#set net1/next-server ${new-server}
 set net0/filename ${new-bootfile}
-#set net1/filename ${new-bootfile}
-chain tftp://${new-server}/iventoy_loader_16000
+chain tftp://${new-server}/${new-bootfile}
 
 :reboot
 reboot
