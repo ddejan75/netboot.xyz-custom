@@ -5,10 +5,6 @@
 
 :custom
 clear custom_choice
-
-menu WinPE Strelec x86
-item --gap WinPE Strelec x86
-item win_load ${space} Loading WinPE Strelec x86
 menu Please choose an option:
 item endless6    ${space} Endless OS 6 2025.06.10
 item hirens      ${space} Hirens Boot CD PE x64
