@@ -29,59 +29,59 @@ goto ${custom_choice}
 goto custom_exit
 
 endless6:
-set base-url ${live_endpoint}/ISO/eos-eos6.0-amd64-amd64.250610-092714.en.iso
-kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}
+set distro_iso ${live_endpoint}/ISO/eos-eos6.0-amd64-amd64.250610-092714.en.iso
+kernel ${memdisk} iso raw
+initrd ${distro_iso}
 boot || goto custom_exit
 
 :hirens
 echo Booting Hirens Boot CD PE x64...
-set base-url ${live_endpoint}/hirens
+set distro_path ${live_endpoint}/hirens
 imgfree
 kernel https://boot.netboot.xyz/wimboot
-initrd -n bootmgr     ${base-url}/BOOTMGR           bootmgr ||
-initrd -n bootmgr.efi ${base-url}/bootmgr.efi       bootmgr.efi ||      
-initrd -n bcd         ${base-url}/boot/bcd          bcd||
-initrd -n boot.sdi    ${base-url}/boot/boot.sdi     boot.sdi||
-initrd -n boot.wim    ${base-url}//sources/boot.wim  boot.wim
+initrd -n bootmgr     ${distro_path}/BOOTMGR           bootmgr ||
+initrd -n bootmgr.efi ${distro_path}/bootmgr.efi       bootmgr.efi ||      
+initrd -n bcd         ${distro_path}/boot/bcd          bcd||
+initrd -n boot.sdi    ${distro_path}/boot/boot.sdi     boot.sdi||
+initrd -n boot.wim    ${distro_path}//sources/boot.wim  boot.wim
 boot || goto custom_exit
 
 :pop2204
-set base-url ${live_endpoint}/ISO/pop-os_22.04_amd64_intel_58.iso
-kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}
+set distro_iso ${live_endpoint}/ISO/pop-os_22.04_amd64_intel_58.iso
+kernel ${memdisk} iso raw
+initrd ${distro_iso}
 boot || goto custom_exit
 
 :proxmox9
-set base-url ${live_endpoint}/ISO/proxmox-ve_9.0-1.iso
-kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}
+set distro_iso ${live_endpoint}/ISO/proxmox-ve_9.0-1.iso
+kernel ${memdisk} iso raw
+initrd ${distro_iso}
 boot || goto custom_exit
 
 :strelec
 echo Booting Strelec...
-set base-url ${live_endpoint}/ISO/strelec
+set distro_path ${live_endpoint}/ISO/strelec
 kernel http://${boot_domain}/wimboot
-initrd ${base_url}/bootmgr       bootmgr ||
-initrd ${base_url}/BCD           BCD ||
-initrd ${base_url}/boot.sdi      boot.sdi ||
-initrd ${base_url}/strelec81.wim boot.wim
-initrd ${base_url}/bootmgr       bootmgr ||
-initrd ${base_url}/BCD           BCD ||
-initrd ${base_url}/boot.sdi      boot.sdi ||
-initrd ${base_url}/strelec81.wim boot.wim
+initrd ${distro_path}/bootmgr       bootmgr ||
+initrd ${distro_path}/BCD           BCD ||
+initrd ${distro_path}/boot.sdi      boot.sdi ||
+initrd ${distro_path}/strelec81.wim boot.wim
+initrd ${distro_path}/bootmgr       bootmgr ||
+initrd ${distro_path}/BCD           BCD ||
+initrd ${distro_path}/boot.sdi      boot.sdi ||
+initrd ${distro_path}/strelec81.wim boot.wim
 boot || goto custom_exit
 
 :strelec_iso
-set base-url ${live_endpoint}/ISO/WinPE11_10_Sergei_Strelec_x64_2025.09.29_English.iso
-kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}
+set distro_iso ${live_endpoint}/ISO/WinPE11_10_Sergei_Strelec_x64_2025.09.29_English.iso
+kernel ${memdisk} iso raw
+initrd ${distro_iso}
 boot || goto custom_exit
 
 win11:
-set base-url ${live_endpoint}/ISO/Win11_25H2_English_x64.iso
-kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${base-url}
+set distro_iso ${live_endpoint}/ISO/Win11_25H2_English_x64.iso
+kernel ${memdisk} iso raw
+initrd ${distro_iso}
 boot || goto custom_exit
 
 :iventoy
