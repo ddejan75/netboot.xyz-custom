@@ -4,8 +4,6 @@
 ###
 
 set base-url ${live_endpoint}/ISO
-echo ${base-url}
-echo ${live_endpoint}
 
 :custom
 clear custom_choice
@@ -29,6 +27,8 @@ item --gap --
 item reboot      ${space} Reboot
 choose custom_choice || goto custom_exit
 echo ${cls}
+echo ${base-url}
+echo ${live_endpoint}
 goto ${custom_choice}
 goto custom_exit
 
