@@ -36,7 +36,7 @@ boot || goto custom_exit
 
 :iventoy2
 # set user-class iVentoy
-set newserver https://iventoy.dimitrovski.net
+set newserver:ip4 192.168.10.91
 set newbootfile iventoy_loader_16000_uefi
 set net0/next-server ${newserver}
 set net1/next-server ${newserver}
