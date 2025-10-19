@@ -32,7 +32,7 @@ goto custom_exit
 
 endless6:
 kernel https://boot.netboot.xyz/memdisk raw iso
-initrd ${initrdbase-url}/eos-eos6.0-amd64-amd64.250610-092714.en.iso
+initrd ${base-url}/eos-eos6.0-amd64-amd64.250610-092714.en.iso
 boot || goto custom_exit
 
 :hirens
