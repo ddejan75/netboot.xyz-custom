@@ -6,30 +6,17 @@
 :custom
 clear custom_choice
 menu Please choose an option:
-item --gap Linux Distros
-item endless6    ${space} Endless OS 6 2025.06.10
 item --gap Utilities:
 item hirens      ${space} Hirens Boot CD PE x64 (2025.10.19)
-item iventoy     ${space} iVentoy
 item iventoy2    ${space} iVentoy2
 item --gap Virtualization:
 item proxmox9    ${space} Proxmox VE 9.0.1
-item --gap Windows:
-item win11       ${space} Windows 11 25H2
 item --gap --
 item reboot      ${space} Reboot
 choose custom_choice || goto custom_exit
 echo ${cls}
-echo ${base-url}
-echo ${live_endpoint}
 goto ${custom_choice}
 goto custom_exit
-
-endless6:
-set distro_iso ${live_endpoint}/ISO/eos-eos6.0-amd64-amd64.250610-092714.en.iso
-kernel ${memdisk} iso raw
-initrd ${distro_iso}
-boot || goto custom_exit
 
 :hirens
 echo Booting Hirens Boot CD PE x64...
@@ -41,12 +28,6 @@ initrd -n bootmgr.efi ${distro_path}/bootmgr.efi       bootmgr.efi ||
 initrd -n bcd         ${distro_path}/boot/bcd          bcd||
 initrd -n boot.sdi    ${distro_path}/boot/boot.sdi     boot.sdi||
 initrd -n boot.wim    ${distro_path}//sources/boot.wim  boot.wim
-boot || goto custom_exit
-
-:pop2204
-set distro_iso ${live_endpoint}/ISO/pop-os_22.04_amd64_intel_58.iso
-kernel ${memdisk} iso raw
-initrd ${distro_iso}
 boot || goto custom_exit
 
 :proxmox9
@@ -68,24 +49,6 @@ initrd ${distro_path}/BCD           BCD ||
 initrd ${distro_path}/boot.sdi      boot.sdi ||
 initrd ${distro_path}/strelec81.wim boot.wim
 boot || goto custom_exit
-
-:strelec_iso
-set distro_iso ${live_endpoint}/ISO/WinPE11_10_Sergei_Strelec_x64_2025.09.29_English.iso
-kernel ${memdisk} iso raw
-initrd ${distro_iso}
-boot || goto custom_exit
-
-win11:
-set distro_iso ${live_endpoint}/ISO/Win11_25H2_English_x64.iso
-kernel ${memdisk} iso raw
-initrd ${distro_iso}
-boot || goto custom_exit
-
-:iventoy
-set user-class iVentoy
-dhcp
-set user-class 
-chain tftp://${next-server}/iventoy_loader_16000_uefi
 
 :iventoy2
 # set user-class iVentoy
