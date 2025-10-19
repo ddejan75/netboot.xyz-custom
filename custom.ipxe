@@ -8,11 +8,8 @@ clear custom_choice
 menu Please choose an option:
 item --gap Linux Distros
 item endless6    ${space} Endless OS 6 2025.06.10
-item pop2204     ${space} Pop OS 22.04
 item --gap Utilities:
 item hirens      ${space} Hirens Boot CD PE x64 (2025.10.19)
-item strelec     ${space} Strelec (2025.09.29)
-item --gap iVentoy:
 item iventoy     ${space} iVentoy
 item iventoy2    ${space} iVentoy2
 item --gap Virtualization:
