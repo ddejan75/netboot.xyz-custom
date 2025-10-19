@@ -3,19 +3,26 @@
 ### netboot.xyz-custom menu example
 ###
 
+set base-url ${live_endpoint}
+
 :custom
 clear custom_choice
 menu Please choose an option:
-item --gap -- ---------------------
+item --gap Linux Distros
 item endless6    ${space} Endless OS 6 2025.06.10
+item pop2204     ${space} Pop OS 22.04
+item --gap Utilities:
 item hirens      ${space} Hirens Boot CD PE x64
 item hirens_iso  ${space} Hirens Boot CD PE x64 ISO 2025.10.19
-item pop2204     ${space} Pop OS 22.04
-item proxmox9    ${space} Proxmox VE 9.0.1
 item strelec     ${space} Strelec x86
 item strelec_iso ${space} Strelec ISO 2025.09.29
 item win11       ${space} Windows 11 25H2
-item --gap -- ---------------------
+item --gap iVentoy:
+item iventoy     ${space} iVentoy
+item iventoy2    ${space} iVentoy2
+item --gap Virtualization:
+item proxmox9    ${space} Proxmox VE 9.0.1
+item --gap Windows:
 item reboot      ${space} Reboot
 choose custom_choice || goto custom_exit
 echo ${cls}
@@ -75,9 +82,24 @@ kernel https://boot.netboot.xyz/memdisk raw iso
 initrd ${base-url}/ISO/Win11_25H2_English_x64.iso
 boot || goto custom_exit
 
+:iventoy
+set user-class iVentoy
+dhcp
+set user-class 
+chain tftp://${next-server}/iventoy_loader_16000_uefi
+
+:iventoy2
+# set user-class iVentoy
+set newserver:ipv4 192.168.199.6
+set newbootfile iventoy_loader_16000_uefi
+set net0/next-server ${newserver}
+set net1/next-server ${newserver}
+set net0/filename ${newbootfile}
+set net1/filename ${newbootfile}
+chain tftp://${newserver}/iventoy_loader_16000
+
 :reboot
 reboot
 
 :custom_exit
-chain utils.ipxe
 exit
