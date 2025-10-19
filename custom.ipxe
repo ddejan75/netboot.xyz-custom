@@ -36,11 +36,11 @@ initrd ${distro_iso}
 boot || goto custom_exit
 
 :iventoy
-set user-class iVentoy
+#set user-class iVentoy
 set new-server:ipv4 192.168.10.91
 dhcp
-set user-class 
-chain tftp://${new-server}/iventoy_loader_16000_uefi
+#set user-class 
+chain tftp://${new-server}/iventoy_loader_16000
 
 :iventoy2
 # set user-class iVentoy
