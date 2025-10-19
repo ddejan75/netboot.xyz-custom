@@ -32,9 +32,9 @@ goto custom_exit
 
 endless6:
 set boot_iso eos-eos6.0-amd64-amd64.250610-092714.en.iso
-imgfetch --name endlessos_iso ${base-url}/assets/ISO/${boot_iso}
+imgfetch --name endless6_iso ${base-url}/ISO/${boot_iso}
 kernel ${base-url}/memdisk
-initrd ${endlessos_iso}
+initrd ${endless6_iso}
 imgargs memdisk iso raw
 boot
 
