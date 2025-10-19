@@ -9,8 +9,6 @@ menu Please choose an option:
 item --gap Utilities:
 item hirens      ${space} Hirens Boot CD PE x64 (2025.10.19)
 item iventoy2    ${space} iVentoy2
-item --gap Virtualization:
-item proxmox9    ${space} Proxmox VE 9.0.1
 item --gap --
 item reboot      ${space} Reboot
 choose custom_choice || goto custom_exit
@@ -36,23 +34,9 @@ kernel ${memdisk} iso raw
 initrd ${distro_iso}
 boot || goto custom_exit
 
-:strelec
-echo Booting Strelec...
-set distro_path ${live_endpoint}/ISO/strelec
-kernel http://${boot_domain}/wimboot
-initrd ${distro_path}/bootmgr       bootmgr ||
-initrd ${distro_path}/BCD           BCD ||
-initrd ${distro_path}/boot.sdi      boot.sdi ||
-initrd ${distro_path}/strelec81.wim boot.wim
-initrd ${distro_path}/bootmgr       bootmgr ||
-initrd ${distro_path}/BCD           BCD ||
-initrd ${distro_path}/boot.sdi      boot.sdi ||
-initrd ${distro_path}/strelec81.wim boot.wim
-boot || goto custom_exit
-
 :iventoy2
 # set user-class iVentoy
-set newserver:ipv4 192.168.199.6
+set newserver:ipv4 192.168.10.91
 set newbootfile iventoy_loader_16000_uefi
 set net0/next-server ${newserver}
 set net1/next-server ${newserver}
