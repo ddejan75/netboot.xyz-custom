@@ -24,7 +24,7 @@ initrd -n bootmgr     ${distro_path}/BOOTMGR           bootmgr ||
 initrd -n bootmgr.efi ${distro_path}/bootmgr.efi       bootmgr.efi ||      
 initrd -n bcd         ${distro_path}/boot/bcd          bcd||
 initrd -n boot.sdi    ${distro_path}/boot/boot.sdi     boot.sdi||
-initrd -n boot.wim    ${distro_path}//sources/boot.wim  boot.wim
+initrd -n boot.wim    ${distro_path}/sources/boot.wim  boot.wim
 boot || goto custom_exit
 
 :reboot
