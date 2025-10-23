@@ -8,8 +8,6 @@ clear custom_choice
 menu Please choose an option:
 item --gap Utilities:
 item hirens      ${space} Hirens Boot CD PE x64 (2025.10.19)
-item iventoy     ${space} iVentoy
-item iventoy2    ${space} iVentoy2
 item --gap --
 item reboot      ${space} Reboot
 choose custom_choice || goto custom_exit
@@ -28,25 +26,6 @@ initrd -n bcd         ${distro_path}/boot/bcd          bcd||
 initrd -n boot.sdi    ${distro_path}/boot/boot.sdi     boot.sdi||
 initrd -n boot.wim    ${distro_path}//sources/boot.wim  boot.wim
 boot || goto custom_exit
-
-:proxmox9
-set distro_iso ${live_endpoint}/ISO/proxmox-ve_9.0-1.iso
-kernel ${memdisk} iso raw
-initrd ${distro_iso}
-boot || goto custom_exit
-
-:iventoy
-#set user-class iVentoy
-set pxeserver:ipv4 192.168.10.91
-set next-server ${pxeserver}
-chain tftp://${pxeserver}/iventoy_loader_16000
-
-:iventoy2
-set new-server:ipv4 192.168.10.91
-set new-bootfile iventoy_loader_16000
-set net0/next-server ${new-server}
-set net0/filename ${new-bootfile}
-chain tftp://${new-server}/${new-bootfile}
 
 :reboot
 reboot
